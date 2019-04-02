@@ -10,6 +10,14 @@
 #include <time.h>
 #include "my.h"
 
+void free_map(char **map, int y)
+{
+    for (int i = 0; i < y; i++) {
+        free(map[i]);
+    }
+    free(map);
+}
+
 int main(int ac, char **av)
 {
     char **map = NULL;
@@ -22,5 +30,6 @@ int main(int ac, char **av)
     map = create_path(map, x, y);
     for (int i = 0; map[i] != NULL; i++)
         printf("%s\n", map[i]);
+    free_map(map, y);
     return (0);
 }
