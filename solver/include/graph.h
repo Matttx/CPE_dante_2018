@@ -14,7 +14,6 @@ typedef struct graph_s
 {
     int **matrix;
     int **nbr;
-    char **room;
 }graph_t;
 
 void create_graph(maze_t *maze);

@@ -24,9 +24,16 @@ void create_graph(maze_t *maze)
             nb++;
         }
     }
-     for (int i = 0; i < maze->rows; i++) {
-        for (int j = 0; j < maze->cols; j++) {
-           printf("%d ", graph->nbr[i][j]);
+    graph->matrix = malloc(sizeof(int *) * (maze->size + 1));
+    for (int i = 0; i < maze->size; i++) {
+        graph->matrix[i] = malloc(sizeof(int) * (maze->size + 1));
+        for (int j = 0; j < maze->size; j++) {
+            graph->matrix[i][j] = 0;
+        }
+    }
+    for (int i = 0; i < maze->size; i++) {
+        for (int j = 0; j < maze->size; j++) {
+           printf("%d ", graph->matrix[i][j]);
         }
         printf("\n");
     }
