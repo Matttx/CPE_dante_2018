@@ -30,9 +30,8 @@ char **map_generator(int x, int y)
     char **map = 0;
 
     map = malloc(sizeof(char *) * (y + 1));
-    for (int i = 0; i < y; i++) {
+    for (int i = 0; i < y; i++)
         map[i] = malloc(sizeof(char) * x + 1);
-    }
     map = fill_map(x, y, map);
     return (map);
 }
