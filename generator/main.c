@@ -12,7 +12,8 @@
 
 void free_map(char **map, int y)
 {
-    for (int i = 0; i < y; i++) {
+    for (int i = 0; map[i] != NULL; i++) {
+        printf("\"%s\"\n", map[i]);
         free(map[i]);
     }
     free(map);
@@ -28,8 +29,11 @@ int main(int ac, char **av)
 
     map = map_generator(x, y);
     map = create_path(map, x, y);
-    for (int i = 0; map[i] != NULL; i++)
-        printf("%s\n", map[i]);
+    for (int i = 0; map[i] != NULL; i++) {
+        printf("%s", map[i]);
+        if (map[i + 1] != NULL)
+            printf("\n");
+    }
     free_map(map, y);
     return (0);
 }
