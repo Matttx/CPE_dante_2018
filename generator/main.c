@@ -34,7 +34,7 @@ int main(int ac, char **av)
         map = set_imperfect_map(map, x);
     }
     for (int i = 0; map[i] != NULL; i++) {
-        write(1, map[i], y);
+        write(1, map[i], x);
         if (map[i + 1] != NULL)
             write(1, "\n", 1);
     }
