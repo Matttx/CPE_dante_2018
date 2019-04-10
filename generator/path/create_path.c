@@ -8,38 +8,42 @@
 #include "my.h"
 #include <stdlib.h>
 
-int random_function(char **map, int i, int j)
+char **handle_random(char **map, int *i, int *j)
 {
-    int random = 0;
+    int cond = 0;
 
-    if (i == 0 && j == 0) return (0);
-    if (map[i][j] == '*' && i == 0) {
-        map[i][j - 1] = '*';
-    } if (map[i][j] == '*') {
-        random = rand() % 2 + 1;
-        if (random == 1 && j != 0)
-            map[i][j - 1] = '*';
-        else if (random == 2 && i != 0)
-            map[i - 1][j] = '*';
-    } if (map[i][j] == 'X') {
-        random = rand() % 4 + 1;
-        if (random == 1 && j != 0)
-            map[i][j - 1] = '*';
-        else if (random == 2 && i != 0)
-            map[i - 1][j] = '*';
+    cond = rand() % 2;
+    map[*i][*j] = '*';
+    if (cond == 0 && *j > 1) {
+        for (int count = 0; *j - count >= 0 && count < 2; count++) {
+            map[*i][*j - count] = '*';
+        }
     }
-    return (0);
+    if (cond == 1 || *j <= 1) {
+        if (*i - 1 >= 0) {
+            map[*i - 1][*j] = '*';
+            map[*i - 2][*j] = '*';
+        }
+    }
+    return (map);
 }
 
 char **create_path(char **map, int x, int y)
 {
     int i = y - 1;
-    int j = x - 1;
+    int min = 0;
 
-    for (; i >= 0; i--) {
-        for (j = x - 1; j >= 0; j--) {
-            random_function(map, i, j);
-        }
+    if (y % 2 == 0)
+        i -= 1;
+    if (x % 2 == 0)
+        min = 1;
+    else
+        min = 0;
+    for (; i >= 0; i -= 2) {
+        for (int j = x - 1; j >= min; j -= 2)
+            map = handle_random(map, &i, &j);
     }
+    for (int f = x - 1; f >= 0; f--)
+        map[0][f] = '*';
     return (map);
 }

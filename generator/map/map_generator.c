@@ -21,17 +21,23 @@ char **fill_map(int x, int y, char **map)
         }
         map[i][j] = '\0';
     }
-    map[i] = NULL;
     return (map);
 }
 
 char **map_generator(int x, int y)
 {
-    char **map = 0;
+    char **map = NULL;
+    int i = 0;
 
     map = malloc(sizeof(char *) * (y + 1));
-    for (int i = 0; i < y; i++)
-        map[i] = malloc(sizeof(char) * x + 1);
+    if (map == NULL)
+        exit(84);
+    for (; i < y; i++) {
+        map[i] = malloc(sizeof(char) * (x + 1));
+        if (map[i] == NULL)
+            exit(84);
+    }
+    map[i] = NULL;
     map = fill_map(x, y, map);
     return (map);
 }
