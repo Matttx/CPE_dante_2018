@@ -14,11 +14,12 @@ RM				=		rm -f
 SRC             =		main.c                  		\
 						map/map_generator.c				\
 						path/create_path.c				\
+						path/imperfect_map.c			\
 
 OBJ             =		$(SRC:.c=.o)
 
 CFLAGS			+=		-I "./include" -g3
-CFLAGS			+=		-W -Wall -Wextra
+CFLAGS			+=		-W -Wall -Wextra -Werror
 
 all:			$(NAME)
 

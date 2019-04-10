@@ -40,7 +40,7 @@ char **create_path(char **map, int x, int y)
     else
         min = 0;
     for (; i >= 0; i -= 2) {
-        for (int j = x - 1; j >= min; j-=2)
+        for (int j = x - 1; j >= min; j -= 2)
             map = handle_random(map, &i, &j);
     }
     for (int f = x - 1; f >= 0; f--)

@@ -8,9 +8,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include <unistd.h>
+#include <string.h>
 #include "my.h"
 
-void free_map(char **map, int y)
+void free_map(char **map)
 {
     for (int i = 0; map[i] != NULL; i++) {
         free(map[i]);
@@ -28,11 +30,14 @@ int main(int ac, char **av)
 
     map = map_generator(x, y);
     map = create_path(map, x, y);
-    for (int i = 0; map[i] != NULL; i++) {
-        printf("%s", map[i]);
-        if (map[i + 1] != NULL)
-            printf("\n");
+    if (ac == 3) {
+        map = set_imperfect_map(map, x);
     }
-    free_map(map, y);
+    for (int i = 0; map[i] != NULL; i++) {
+        write(1, map[i], y);
+        if (map[i + 1] != NULL)
+            write(1, "\n", 1);
+    }
+    free_map(map);
     return (0);
 }
