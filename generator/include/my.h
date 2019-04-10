@@ -10,5 +10,6 @@
 
 char **map_generator(int x, int y);
 char **create_path(char **map, int x, int y);
+char **set_imperfect_map(char **map, int cols);
 
 #endif //CPE_DANTE_2018_MY_H
