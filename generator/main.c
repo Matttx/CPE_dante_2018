@@ -13,7 +13,6 @@
 void free_map(char **map, int y)
 {
     for (int i = 0; map[i] != NULL; i++) {
-        printf("\"%s\"\n", map[i]);
         free(map[i]);
     }
     free(map);

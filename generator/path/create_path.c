@@ -15,8 +15,10 @@ char **handle_random(char **map, int *i, int *j)
     cond = rand() % 2;
     map[*i][*j] = '*';
     if (cond == 0) {
-        map[*i][*j - 1] = '*';
-        map[*i][*j - 2] = '*';
+        if (*j - 1 > 0) {
+            map[*i][*j - 1] = '*';
+            map[*i][*j - 2] = '*';
+        }
         *j -= 2;
     }
     if (cond == 1) {
@@ -44,7 +46,7 @@ char **create_path(char **map, int x, int y)
     }
     for (int f = x - 1; f >= 0; f--)
         map[0][f] = '*';
-    for (int f = y - 1; f >= 0; f--)
-        map[f][0] = '*';
+/*     for (int f = y - 1; f >= 0; f--)
+        map[f][0] = '*'; */
     return (map);
 }
