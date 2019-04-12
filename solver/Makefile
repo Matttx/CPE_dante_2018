@@ -14,7 +14,7 @@ RM				=		rm -f
 SRC             =		main.c          			\
 						get_maze/get_maze.c			\
 						get_maze/count.c			\
-						get_maze/create_graph.c		\
+						solve_maze.c				\
 
 OBJ             =		$(SRC:.c=.o)
 

@@ -13,9 +13,8 @@
 #include <unistd.h>
 #include "maze.h"
 #include "my.h"
-#include "graph.h"
 
-char **copy_map(char *str, char **map)
+char **copy_map(char *str, char **map, maze_t *maze)
 {
     int cols = 0;
     int rows = 0;
@@ -25,8 +24,11 @@ char **copy_map(char *str, char **map)
             map[rows][cols] = '\0';
             rows++;
             cols = 0;
-        }
-        else {
+        } else if (rows == maze->rows - 1 && cols == maze->cols - 1) {
+            map[rows][cols] = '\0';
+            rows++;
+            break;
+        } else {
             map[rows][cols] = str[i];
             cols++;
         }
@@ -53,7 +55,7 @@ char **create_map(char *str, maze_t *maze)
             return (NULL);
     }
     map[i] = NULL;
-    map = copy_map(str, map);
+    map = copy_map(str, map, maze);
     return (map);
 }
 
@@ -85,11 +87,5 @@ void create_maze(char **argv)
 
     file = get_file(argv);
     maze->map = create_map(file, maze);
-    /* for (int i = 0; maze->map[i] != NULL; i++)
-        printf("%s\n", maze->map[i]); */
-    /* for (int i = 0; maze->map[i] != NULL; i++)
-        free(maze->map[i]);
-    free(maze->map);
-    free(maze); */
-    create_graph(maze);
+    solve_maze(maze);
 }
