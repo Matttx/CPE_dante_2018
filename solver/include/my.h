@@ -17,4 +17,8 @@ void create_maze(char **argv);
 int count_rows(char *str);
 int count_cols(char *str);
 void solve_maze(maze_t *maze);
+int check_right(maze_t *maze, int *x, int *y);
+int check_down(maze_t *maze, int *x, int *y);
+int check_left(maze_t *maze, int *x, int *y);
+int check_top(maze_t *maze, int *x, int *y);
 #endif /* !MY_H_ */

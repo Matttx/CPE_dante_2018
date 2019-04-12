@@ -15,6 +15,7 @@ SRC             =		main.c          			\
 						get_maze/get_maze.c			\
 						get_maze/count.c			\
 						solve_maze.c				\
+						condition_move.c			\
 
 OBJ             =		$(SRC:.c=.o)
 

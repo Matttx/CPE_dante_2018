@@ -30,30 +30,19 @@ void free_maze(maze_t *maze)
 
 int check_move(maze_t *maze, int *x, int *y)
 {
-    if (*y < maze->cols - 1 && IS_WALL(maze->map[*x][*y + 1]) == 0) {
-        (*y)++;
+    if (check_right(maze, x, y) == 1)
         return (0);
-    }
-    if (*x < maze->rows - 1 && *y <= maze->cols - 1 && (maze->map[*x][*y + 1] == '\0' || IS_WALL(maze->map[*x][*y + 1]) == 1) &&
-        (*x == 0 || IS_WALL(maze->map[*x - 1][*y]) == 1) && IS_WALL(maze->map[*x + 1][*y]) == 0) {
-        (*x)++;
+    if (check_down(maze, x, y) == 1)
         return (0);
-    }
-    if (*y >= 0 && *x < maze->rows - 1 && *y <= maze->cols - 1 && (*x >= 0 || IS_WALL(maze->map[*x - 1][*y]) == 1) &&
-        (maze->map[*x][*y + 1] == '\0' || IS_WALL(maze->map[*x][*y + 1]) == 1) && IS_WALL(maze->map[*x + 1][*y]) == 1) {
-        (*y)--;
+    if (check_left(maze, x, y) == 1)
         return (0);
-    }
-    if (*x < maze->rows - 1 && *y < maze->cols - 1 && *y != 0 && IS_WALL(maze->map[*x + 1][*y]) == 1 &&
-        IS_WALL(maze->map[*x][*y + 1]) == 1 && IS_WALL(maze->map[*x][*y - 1]) == 1) {
-        (*x)--;
+    if (check_top(maze, x, y) == 1)
         return (0);
-    }
     if (*x + 1 <= maze->rows - 1 && IS_WALL(maze->map[*x + 1][*y]) == 0) {
         (*x)++;
         return (0);
     }
-    return(84);
+    return (84);
 }
 
 void solve_maze(maze_t *maze)
