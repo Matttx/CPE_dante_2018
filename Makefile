@@ -11,8 +11,10 @@ RM				=		rm -f
 
 GEN 			=		generator
 
+SOL				=		solver
+
 all:
-				cd $(GEN) && $(MAKE) sweet
+				cd $(GEN) && $(MAKE) sweet && cd .. && cd $(SOL) && $(MAKE) sweet
 
 clean:
 				$(RM) $(OBJ)
