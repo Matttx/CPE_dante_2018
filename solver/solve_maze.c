@@ -60,6 +60,7 @@ void solve_maze(maze_t *maze)
         }
         else {
             if (check_move(maze, &x, &y) == 84) {
+                disp_maze(maze);
                 free_maze(maze);
                 exit(84);
             }
