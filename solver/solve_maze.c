@@ -14,7 +14,7 @@
 void check_maze(maze_t *maze)
 {
     for (int i = 0; maze->map[i] != NULL; i++) {
-        for (int j = 0; maze->map[i][j] != '\0'; j++) {
+        for (int j = 0; j < maze->cols; j++) {
             if (maze->map[i][j] == 'a')
                 maze->map[i][j] = '*';
         }
@@ -71,11 +71,11 @@ void solve_maze(maze_t *maze)
         }
         else {
             if (check_move(maze, &x, &y) == 84) {
-                disp_maze(maze);
-                free_maze(maze);
+                printf("no solution found\n");
                 exit(84);
             }
         }
     }
+    printf("no solution found\n");
     exit(84);
 }
