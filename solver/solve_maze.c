@@ -11,8 +11,19 @@
 #include "maze.h"
 #include "my.h"
 
+void check_maze(maze_t *maze)
+{
+    for (int i = 0; maze->map[i] != NULL; i++) {
+        for (int j = 0; maze->map[i][j] != '\0'; j++) {
+            if (maze->map[i][j] == 'a')
+                maze->map[i][j] = '*';
+        }
+    }
+}
+
 void disp_maze(maze_t *maze)
 {
+    check_maze(maze);
     for (int i = 0; maze->map[i] != NULL; i++) {
         write(1, maze->map[i], maze->cols);
         if (maze->map[i + 1] != NULL)

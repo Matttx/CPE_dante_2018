@@ -8,7 +8,7 @@
 #ifndef MY_H_
 #define MY_H_
 
-#define IS_WALL(c) ((c == 'X' || c == 'o') ? 1 : 0)
+#define IS_WALL(c) ((c == 'X' || c == 'o' || c == 'a') ? 1 : 0)
 
 #include "maze.h"
 
