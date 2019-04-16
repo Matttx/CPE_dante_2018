@@ -98,6 +98,7 @@ void create_maze(char **argv)
     maze_t *maze = malloc(sizeof(maze_t));
 
     file = get_file(argv);
-    maze->map = create_map(file, maze);
+    get_size(file, maze);
+    maze->map = str_split(file, '\n');
     solve_maze(maze);
 }

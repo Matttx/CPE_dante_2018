@@ -22,4 +22,6 @@ int check_down(maze_t *maze, int *x, int *y);
 int check_left(maze_t *maze, int *x, int *y);
 int check_top(maze_t *maze, int *x, int *y);
 void free_maze(maze_t *maze);
+char **str_split(char const *str, char c);
+void get_size(char *str, maze_t *maze);
 #endif /* !MY_H_ */

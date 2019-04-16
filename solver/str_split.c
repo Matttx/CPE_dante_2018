@@ -6,6 +6,20 @@
 */
 
 #include <stdlib.h>
+#include "maze.h"
+
+void get_size(char *str, maze_t *maze)
+{
+    int i = 0;
+
+    for (int j = 0; str[j] != '\n'; j++, maze->cols++);
+    for (i = 0; str[i] != '\0'; i++) {
+        if (str[i] == '\n')
+            maze->rows++;
+    }
+    if (str[i] == '\0' && str[i - 1] != '\n')
+        maze->rows++;
+}
 
 static int spliter_count(char const *tab, char c)
 {
@@ -27,7 +41,6 @@ char **str_split(char const *str, char c)
     int i = 0;
     int k = 0;
 
-    printf("%s\n", str);
     args = malloc(sizeof(char *) * (size + 1));
     for (int j = 0; j < size; j++) {
         for (k = 0 ; str[i + k] != c && str[i + k] != '\0' ; k++);

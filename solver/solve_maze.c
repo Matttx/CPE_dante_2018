@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
 #include "maze.h"
 #include "my.h"
 
@@ -23,9 +24,11 @@ void check_maze(maze_t *maze)
 
 void disp_maze(maze_t *maze)
 {
+    int size = strlen(maze->map[0]);
+
     check_maze(maze);
     for (int i = 0; maze->map[i] != NULL; i++) {
-        write(1, maze->map[i], maze->cols);
+        write(1, maze->map[i], size);
         if (maze->map[i + 1] != NULL)
             write(1, "\n", 1);
     }
@@ -62,7 +65,7 @@ void solve_maze(maze_t *maze)
     int y = 0;
     int count = 0;
 
-    for (; count < 50000; count++) {
+    for (; count < 5000; count++) {
         maze->map[x][y] = 'o';
         if (x == maze->rows - 1 && y == maze->cols - 1) {
             disp_maze(maze);
@@ -70,10 +73,7 @@ void solve_maze(maze_t *maze)
             exit(0);
         }
         else {
-            if (check_move(maze, &x, &y) == 84) {
-                printf("no solution found\n");
-                exit(84);
-            }
+            check_move(maze, &x, &y);
         }
     }
     printf("no solution found\n");
