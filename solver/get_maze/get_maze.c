@@ -80,12 +80,24 @@ char *get_file(char **argv)
     return (str);
 }
 
+void check_error(maze_t *maze)
+{
+    for (int i = 0; maze->map[i] != NULL; i++) {
+        for (int j = 0; maze->map[i][j] != '\0'; j++) {
+            if (maze->map[i][j] != '*' && maze->map[i][j] != 'X') {
+                free_maze(maze);
+                exit(84);
+            }
+        }
+    }
+}
+
 void create_maze(char **argv)
 {
     char *file = NULL;
     maze_t *maze = malloc(sizeof(maze_t));
 
     file = get_file(argv);
-    maze->map = str_split(file, '\n');
+    maze->map = create_map(file, maze);
     solve_maze(maze);
 }

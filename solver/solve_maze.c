@@ -11,8 +11,19 @@
 #include "maze.h"
 #include "my.h"
 
+void check_maze(maze_t *maze)
+{
+    for (int i = 0; maze->map[i] != NULL; i++) {
+        for (int j = 0; j < maze->cols; j++) {
+            if (maze->map[i][j] == 'a')
+                maze->map[i][j] = '*';
+        }
+    }
+}
+
 void disp_maze(maze_t *maze)
 {
+    check_maze(maze);
     for (int i = 0; maze->map[i] != NULL; i++) {
         write(1, maze->map[i], maze->cols);
         if (maze->map[i + 1] != NULL)
@@ -60,10 +71,11 @@ void solve_maze(maze_t *maze)
         }
         else {
             if (check_move(maze, &x, &y) == 84) {
-                free_maze(maze);
+                printf("no solution found\n");
                 exit(84);
             }
         }
     }
+    printf("no solution found\n");
     exit(84);
 }

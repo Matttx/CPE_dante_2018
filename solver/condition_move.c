@@ -35,11 +35,13 @@ int check_down(maze_t *maze, int *x, int *y)
 
 int check_left(maze_t *maze, int *x, int *y)
 {
-    if (*y >= 0 && *x < maze->rows - 1 && *y <= maze->cols - 1 &&
+    if (*y >= 0 && *x < maze->rows - 1 && *y < maze->cols &&
         (*x >= 0 || IS_WALL(maze->map[*x - 1][*y]) == 1) &&
         (maze->map[*x][*y + 1] == '\0' ||
         IS_WALL(maze->map[*x][*y + 1]) == 1) &&
-        IS_WALL(maze->map[*x + 1][*y]) == 1) {
+        IS_WALL(maze->map[*x + 1][*y]) == 1 &&
+        maze->map[*x][*y - 1] != 'X') {
+        maze->map[*x][*y] = 'a';
         (*y)--;
         return (1);
     }
@@ -48,10 +50,12 @@ int check_left(maze_t *maze, int *x, int *y)
 
 int check_top(maze_t *maze, int *x, int *y)
 {
-    if (*x < maze->rows - 1 && *y < maze->cols - 1 && *y != 0 &&
+    if (*x > 0 && *x < maze->rows - 1 && *y < maze->cols && *y != 0 &&
         IS_WALL(maze->map[*x + 1][*y]) == 1 &&
-        IS_WALL(maze->map[*x][*y + 1]) == 1 &&
+        (maze->map[*x][*y + 1] == '\0' ||
+        IS_WALL(maze->map[*x][*y + 1]) == 1) &&
         IS_WALL(maze->map[*x][*y - 1]) == 1) {
+        maze->map[*x][*y] = 'a';
         (*x)--;
         return (1);
     }
